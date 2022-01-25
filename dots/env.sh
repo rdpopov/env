@@ -21,6 +21,11 @@ fzf_install(){
   [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 }
 
+# nix package manager setup
+if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+fi
+
 
 export HAS_BATTERY=$(upower -d 2>/dev/null |grep BAT -c)
 # source QUOTY
