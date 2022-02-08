@@ -3,13 +3,15 @@
 # tmux status script
 
 fay() {
-	packages=$(awk {'print $1'} <<< $(yay -Ss $1 | awk 'NR%2 {printf "\033[1;32m%s \033[0;36m%s\033[0m — ",$1,$2;next;}{ print substr($0, 5, length($0) - 4); }' | fzf -m --ansi))
-	[ "$packages" ] && yay -S $(echo "$packages" | tr "\n" " ")
+  yay -Slq | fzf -m --preview 'yay -Si {1}' | xargs -ro sudo yay -S
 }
 
 facman() {
-	packages="$(awk {'print $1'} <<< $(pacman -Ss $1 | awk 'NR%2 {printf "\033[1;32m%s \033[0;36m%s\033[0m — ",$1,$2;next;}{ print substr($0, 5, length($0) - 4); }' | fzf -m --ansi --select-1))"
-	[ "$packages" ] && pacman -S $(echo "$packages" | tr "\n" " ")
+  pacman -Slq | fzf -m --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S
+}
+
+faru() {
+  paru -Slq | fzf -m --preview 'paru -Si {1}' | xargs -ro sudo paru -S
 }
 
 fapt() {
@@ -35,8 +37,9 @@ export HAS_BATTERY=$(upower -d 2>/dev/null |grep BAT -c)
 . "$HOME/.cargo/env"
 
 export TMUX_VER=$(tmux -V|cut -f2 -d" ") # need this to automatically pick clors for editor
-export GOPATH=$(go env GOPATH) 
-export PATH=$PATH:$(go env GOPATH)/bin
+export PATH="$HOME/.nimble/bin:$PATH"
+export PATH="$HOME/.local/lib/python3.9/site-packages/:$PATH"
+export BATTERIES=$(upower -e|grep BAT)
 
 alias recharge='tlp fullcharge'
 
@@ -59,4 +62,4 @@ set -o vi
 bind 'set show-mode-in-prompt on'
 bind 'set vi-ins-mode-string \1\e[34;1m\2(INSERT)\1\e[0m\2'
 bind 'set vi-cmd-mode-string \1\e[33;1m\2(COMAND)\1\e[0m\2'
-PS1='[\[\033[01;32m\]\u \[\033[01;34m\]\W\[\033[00m\]]\[\e[93m\]$(parse_git_branch)\[\e[00m\] \$ '
+PS1='[\[\033[01;32m\]\u @\h \[\033[01;34m\]\W\[\033[00m\]]\[\e[93m\]$(parse_git_branch)\[\e[00m\] \$ '

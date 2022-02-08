@@ -10,26 +10,24 @@ fi
 
 # package
 nix-env -iA \
+  nixos.git \
   nixos.ripgrep \
   nixos.tmux \
   nixos.fuse \
   nixos.ack \
   nixos.ccls \
-  nixos.sumneko-lua-language-server \
+  nixos.mpv \
   nixos.xfce.xfce4-terminal
 
 # setup neovim 
-if [[ -d '~/.config/nvim' ]]; then 
-  pushd ~/.config/
+if [[ -d '~/.config/nvim' ]]; then
+  cd $HOME/.config/
   git clone https://github.com/rdpopov/nvim.git
-  popd
+  cd -
 else 
-  pushd ~/.config/nvim
+  cd $HOME/.config/nvim
   # might need rework
-  git stash 
-  git fetch origin
-  git checkout FETCH_HEAD
-  popd
+  cd -
 fi
 setup_nvim
 update_plug
@@ -43,13 +41,13 @@ setup_quoty
 # setup rust and cargo
 
 curl https://sh.rustup.rs -sSf | sh
-source ~/.bashrc
+source "$HOME/.bashrc"
 rustup +nightly component add rust-analyzer-preview
 
 # setup nim
 
 curl https://nim-lang.org/choosenim/init.sh -sSf | sh
-source ~/.bashrc
+source "$HOME/.bashrc"
 nimble install nimlsp
 
 # setup environment
