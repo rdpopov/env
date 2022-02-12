@@ -10,27 +10,19 @@ fi
 
 # package
 nix-env -iA \
-  nixos.git \
-  nixos.ripgrep \
-  nixos.tmux \
-  nixos.fuse \
-  nixos.ack \
-  nixos.ccls \
-  nixos.mpv \
-  nixos.xfce.xfce4-terminal
+  nixpkgs.git \
+  nixpkgs.ripgrep \
+  nixpkgs.tmux \
+  nixpkgs.fuse \
+  nixpkgs.ack \
+  nixpkgs.ccls \
+  nixpkgs.mpv
 
 # setup neovim 
 if [[ -d '~/.config/nvim' ]]; then
-  cd $HOME/.config/
-  git clone https://github.com/rdpopov/nvim.git
-  cd -
-else 
-  cd $HOME/.config/nvim
-  # might need rework
-  cd -
+  git clone https://github.com/rdpopov/nvim.git $HOME/.config/nvim
+  setup_nvim
 fi
-setup_nvim
-update_plug
 
 # setup tmux
 setup_tmux
