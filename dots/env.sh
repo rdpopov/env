@@ -3,15 +3,15 @@
 # tmux status script
 
 fay() {
-  yay -Slq | fzf -m --preview 'yay -Si {1}' | xargs -ro sudo yay -S
+  yay -Slq | fzf -m --preview 'yay -Si {1}' | xargs -ro yay -S
 }
 
 facman() {
-  pacman -Slq | fzf -m --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S
+  pacman -Slq | fzf -m --preview 'pacman -Si {1}' | xargs -ro pacman -S
 }
 
 faru() {
-  paru -Slq | fzf -m --preview 'paru -Si {1}' | xargs -ro sudo paru -S
+  paru -Slq | fzf -m --preview 'paru -Si {1}' | xargs -ro paru -S
 }
 
 fapt() {
