@@ -20,7 +20,7 @@ fapt() {
 
 fzf_install(){
   git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
-  [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+  [ -f $HOME/.fzf.bash ] && source ~/.fzf.bash
 }
 
 # nix package manager setup
@@ -31,9 +31,9 @@ fi
 
 export HAS_BATTERY=$(upower -d 2>/dev/null |grep BAT -c)
 # source QUOTY
-[[ -e ~/.config/quoty/ ]] && source ~/.config/quoty/quoty.sh  || echo "No quotes today sir"
+[[ -e ~/.config/quoty/ ]] && source $HOME/.config/quoty/quoty.sh  || echo "No quotes today sir"
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+[ -f ~/.fzf.bash ] && source $HOME/.fzf.bash
 . "$HOME/.cargo/env"
 
 export TMUX_VER=$(tmux -V|cut -f2 -d" ") # need this to automatically pick clors for editor
@@ -62,4 +62,4 @@ set -o vi
 bind 'set show-mode-in-prompt on'
 bind 'set vi-ins-mode-string \1\e[34;1m\2(INSERT)\1\e[0m\2'
 bind 'set vi-cmd-mode-string \1\e[33;1m\2(COMAND)\1\e[0m\2'
-PS1='[\[\033[01;32m\]\u @\h \[\033[01;34m\]\W\[\033[00m\]]\[\e[93m\]$(parse_git_branch)\[\e[00m\] \$ '
+PS1='[\[\033[01;32m\]\u \[\033[01;31m\]@\H \[\033[01;34m\]\W\[\033[00m\]]\[\e[93m\]$(parse_git_branch)\[\e[00m\] \$ '
