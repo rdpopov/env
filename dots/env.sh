@@ -38,7 +38,7 @@ export HAS_BATTERY=$(upower -d 2>/dev/null |grep BAT -c)
 
 export TMUX_VER=$(tmux -V|cut -f2 -d" ") # need this to automatically pick clors for editor
 export PATH="$HOME/.nimble/bin:$PATH"
-export PATH="$HOME/.local/lib/python3.9/site-packages/:$PATH"
+export PATH="$HOME/.local/lib/python3.10/site-packages/:$PATH"
 export BATTERIES=$(upower -e|grep BAT)
 
 alias recharge='tlp fullcharge'
