@@ -9,8 +9,14 @@ if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
 fi
 
 # package
+git_pkg=""
+
+if [[ -z $(which git) ]]; then
+    git_pkg="nixpkgs.git"
+fi
+
 nix-env -iA \
-  nixpkgs.git \
+  $git_pkg \
   nixpkgs.ripgrep \
   nixpkgs.tmux \
   nixpkgs.fuse \
