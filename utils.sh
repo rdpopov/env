@@ -1,7 +1,5 @@
 setup_nvim(){
-    wget --quiet https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage --output-document nvim
-    chmod +x nvim && sudo chown root:root nvim && sudo mv nvim /usr/local/bin
-    [ -d "$HOME/.undodir" ]  || mkdir $HOME"/.undodir"
+  cd '~/.config/nvim'; bash setup.sh --nvim
 }
 
 update_plug(){
@@ -20,7 +18,7 @@ update_plug(){
 
 setup_tmux(){
     [ -e "$HOME/.tmux.conf" ] && mv $HOME/.tmux.conf $HOME/.tmux.conf.bak
-    cp dots/tmux.conf $HOME/.tmux.conf
+    cp ./dots/tmux/.tmux.conf $HOME/.tmux.conf
     [ -d "$HOME/.tmux/plugins/tpm" ] || git clone https://www.github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm #tmux package manager
     [[ $(grep ~/.bashrc -e env\.sh -c) == "0" ]] && echo "source ~/.config/env/dots/env.sh" >> ~/.bashrc || echo "already in .bashrc"
 }

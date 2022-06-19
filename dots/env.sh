@@ -33,8 +33,9 @@ export HAS_BATTERY=$(upower -d 2>/dev/null |grep BAT -c)
 # source QUOTY
 [[ -e ~/.config/quoty/ ]] && source $HOME/.config/quoty/quoty.sh  || echo "No quotes today sir"
 
-[ -f ~/.fzf.bash ] && source $HOME/.fzf.bash
-. "$HOME/.cargo/env"
+[[ -f ~/.fzf.bash ]] || fzf_install
+[[ -f ~/.fzf.bash ]] && source $HOME/.fzf.bash
+[[ -d "$HOME/.cargo/" ]] && source $HOME/.cargo/env || echo "No cargo/rust"
 
 export TMUX_VER=$(tmux -V|cut -f2 -d" ") # need this to automatically pick clors for editor
 export PATH="$HOME/.nimble/bin:$PATH"
@@ -43,7 +44,7 @@ export BATTERIES=$(upower -e|grep BAT)
 
 alias recharge='tlp fullcharge'
 
-[[ -z $(command -v fzf) ]] && fzf_install # auto install fzf if fzf does not exist
+# [[ -z $(command -v fzf) ]] && fzf_install # auto install fzf if fzf does not exist
 
 [[ -x "$(command -v apt)" ]] && alias pac="fapt"
 [[ -x "$(command -v pacman)" ]] && alias pac="facman"
