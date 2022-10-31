@@ -43,8 +43,9 @@ export PATH="$HOME/.local/lib/python3.10/site-packages/:$PATH"
 export BATTERIES=$(upower -e|grep BAT)
 
 alias recharge='tlp fullcharge'
+alias v='nvim'
 
-# [[ -z $(command -v fzf) ]] && fzf_install # auto install fzf if fzf does not exist
+[[ -z $(command -v fzf) ]] && fzf_install # auto install fzf if fzf does not exist
 
 [[ -x "$(command -v apt)" ]] && alias pac="fapt"
 [[ -x "$(command -v pacman)" ]] && alias pac="facman"
@@ -61,6 +62,9 @@ set keymap vi-command "cw": "dei"
 set -o vi
 
 bind 'set show-mode-in-prompt on'
-bind 'set vi-ins-mode-string \1\e[34;1m\2(INSERT)\1\e[0m\2'
-bind 'set vi-cmd-mode-string \1\e[33;1m\2(COMAND)\1\e[0m\2'
+bind 'set vi-ins-mode-string \1\e[34;1m\2(I)\1\e[0m\2'
+bind 'set vi-cmd-mode-string \1\e[33;1m\2(C)\1\e[0m\2'
+bind 'set show-all-if-ambiguous on'
+bind 'TAB:menu-complete'
+
 PS1='[\[\033[01;32m\]\u \[\033[01;31m\]@\H \[\033[01;34m\]\W\[\033[00m\]]\[\e[93m\]$(parse_git_branch)\[\e[00m\] \$ '
