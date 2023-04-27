@@ -40,9 +40,13 @@ export HAS_BATTERY=$(upower -d 2>/dev/null |grep BAT -c)
 export TMUX_VER=$(tmux -V|cut -f2 -d" ") # need this to automatically pick clors for editor
 export PATH="$HOME/.nimble/bin:$PATH"
 export PATH="$HOME/.local/lib/python3.10/site-packages/:$PATH"
+export PATH="$HOME/bin/:$PATH"
 export BATTERIES=$(upower -e|grep BAT)
 
 alias recharge='tlp fullcharge'
+alias workstart='$HOME/.config/env/dots/tmux/timer.sh -s'
+alias workfinish='$HOME/.config/env/dots/tmux/timer.sh -f'
+alias workpause='$HOME/.config/env/dots/tmux/timer.sh -p'
 alias v='nvim'
 
 [[ -z $(command -v fzf) ]] && fzf_install # auto install fzf if fzf does not exist
